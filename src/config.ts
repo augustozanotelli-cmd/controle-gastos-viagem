@@ -1,0 +1,21 @@
+// Lista de integrantes da equipe exibida no dropdown.
+export const PESSOAS = [
+  "Artur Oliveira Cunha",
+  "Augusto Lopes Zanotelli",
+  "Thiago Dutra Da Silva Oliveira",
+  "Daniel Guachalla de Andrade",
+  "Icaro Henrique de Almeida Cravinhos",
+  "João Pedro Silva de Azevedo Santos",
+  "João Vitor Teixeira Duarte",
+  "José Ricardo Garcia Lorenção",
+  "Julia Ferreira Rigo",
+  "Lana Beatriz de Oliveira dos Anjos",
+  "Letícia Olive Alves",
+  "José Vanderly Ferreira Filho",
+  "Mateus Littig Fernandes",
+  "Miguel Carasso Francisco",
+  "Rafael Erick Azevedo Santos",
+  "Mell Huebra Souza Schettino",
+  "Thaís Lobato Pereira",
+  "Anna Beatriz Martins da Silva",
+];
