@@ -86,7 +86,7 @@ git init
 git add .
 git commit -m "Cria controle de gastos da viagem"
 git branch -M main
-git remote add origin https://github.com/SEU-USUARIO/controle-gastos-viagem.git
+git remote add origin https://github.com/augustozanotelli-cmd/controle-gastos-viagem
 git push -u origin main
 ```
 

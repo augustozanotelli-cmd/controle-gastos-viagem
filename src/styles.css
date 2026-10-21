@@ -64,6 +64,10 @@ input::placeholder { color: #a3afa8; }
 .history-icon { background: #f1f3f8; color: #58688c; }
 .refresh-button { margin-left: auto; display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid var(--line); border-radius: 9px; background: #fff; color: #62756a; }
 .refresh-button:hover { background: #f3f8f4; }
+
+.history-filter { margin: 0 0 12px; padding: 12px; background: #f7faf8; border: 1px solid #e8efea; border-radius: 12px; }
+.history-filter label { display: block; margin-bottom: 7px; color: #607168; font-size: 11px; }
+.history-filter select { margin: 0; height: 39px; background: #fff; }
 .transactions { max-height: 430px; overflow-y: auto; }
 .transaction { display: flex; align-items: center; gap: 11px; padding: 14px 0; border-bottom: 1px solid #edf1ee; min-width: 0; }
 .transaction:last-child { border-bottom: 0; }

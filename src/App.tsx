@@ -25,6 +25,7 @@ export default function App() {
   const [valor, setValor] = useState("");
   const [descricao, setDescricao] = useState("");
   const [lancamentos, setLancamentos] = useState<Lancamento[]>([]);
+  const [filtroPessoa, setFiltroPessoa] = useState("todas");
   const [carregando, setCarregando] = useState(true);
   const [salvando, setSalvando] = useState(false);
   const [erro, setErro] = useState("");
@@ -54,6 +55,13 @@ export default function App() {
   useEffect(() => {
     void carregar();
   }, [carregar]);
+
+  const lancamentosFiltrados = useMemo(
+    () => filtroPessoa === "todas"
+      ? lancamentos
+      : lancamentos.filter((item) => item.pessoa === filtroPessoa),
+    [lancamentos, filtroPessoa],
+  );
 
   const totais = useMemo(() => {
     const entradas = lancamentos
@@ -175,13 +183,29 @@ export default function App() {
             <button className="refresh-button" type="button" onClick={() => void carregar()} aria-label="Atualizar lançamentos" title="Atualizar"><LoaderCircle size={17} /></button>
           </div>
 
+          <div className="history-filter">
+            <label htmlFor="filtro-pessoa">Filtrar por pessoa</label>
+            <select
+              id="filtro-pessoa"
+              value={filtroPessoa}
+              onChange={(e) => setFiltroPessoa(e.target.value)}
+            >
+              <option value="todas">Todas as pessoas</option>
+              {PESSOAS.map((nome) => <option key={nome} value={nome}>{nome}</option>)}
+            </select>
+          </div>
+
           {carregando ? (
             <div className="empty-state"><LoaderCircle className="spin" size={24} /><p>Carregando lançamentos...</p></div>
-          ) : lancamentos.length === 0 ? (
-            <div className="empty-state"><div className="empty-icon"><Banknote size={24} /></div><strong>Nenhum lançamento ainda</strong><p>Quando você registrar uma entrada ou gasto, ele aparecerá aqui.</p></div>
+          ) : lancamentosFiltrados.length === 0 ? (
+            <div className="empty-state">
+              <div className="empty-icon"><Banknote size={24} /></div>
+              <strong>{filtroPessoa === "todas" ? "Nenhum lançamento ainda" : "Nenhum lançamento para esta pessoa"}</strong>
+              <p>{filtroPessoa === "todas" ? "Quando você registrar uma entrada ou gasto, ele aparecerá aqui." : "Selecione outra pessoa ou escolha “Todas as pessoas” para ver outros lançamentos."}</p>
+            </div>
           ) : (
             <div className="transactions">
-              {lancamentos.map((item) => (
+              {lancamentosFiltrados.map((item) => (
                 <article className="transaction" key={item.id}>
                   <div className={`transaction-icon ${item.tipo}`}>
                     {item.tipo === "entrada" ? <ArrowDownLeft size={19} /> : <ArrowUpRight size={19} />}
@@ -197,7 +221,7 @@ export default function App() {
                   </div>
                 </article>
               ))}
-              {lancamentos.length >= 200 && <p className="hint">Mostrando os 200 lançamentos mais recentes.</p>}
+              {lancamentos.length >= 200 && filtroPessoa === "todas" && <p className="hint">Mostrando os 200 lançamentos mais recentes.</p>}
             </div>
           )}
         </section>
